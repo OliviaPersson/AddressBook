@@ -44,6 +44,15 @@ namespace AddressBook
                     Console.WriteLine($"{addressBook[i].firstName} {addressBook[i].lastName}  {addressBook[i].number}  {addressBook[i].email}");
                 }
             }
+            Console.WriteLine("Hej och välkommen till adressboken!");
+            Console.WriteLine("Skriv 'sluta' om du vill avsluta programmet!");
+            Console.Write("> ");
+            string command = Console.ReadLine();
+
+            if (command == "sluta")
+            {
+                Console.WriteLine("Hej då!");
+            }
         }
     }
 }
