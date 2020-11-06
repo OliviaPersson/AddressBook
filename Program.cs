@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace AddressBook
 {
@@ -42,7 +43,6 @@ namespace AddressBook
             Console.WriteLine("Hej och välkommen till adressboken!");
             Console.WriteLine("Skriv 'sluta' om du vill avsluta programmet!");
             string command;
-
             do
             {
                 Console.Write("> ");
@@ -74,11 +74,10 @@ namespace AddressBook
                     string email = Console.ReadLine();
                     //Console.WriteLine($"namn: {firstName} {lastName} num: {number} email: {email}"); //TestPrint
                     addressBook.Add(new Person(name, address, number, email));
-                }
-                else if (command == "spara")
-                {
+
+                    //Source: https://www.c-sharpcorner.com/article/csharp-streamwriter-example/
                     using (StreamWriter writer = new StreamWriter(fileName))
-                        for(int i = 0; i < addressBook.Count(); i++)
+                        for (int i = 0; i < addressBook.Count(); i++)
                         {
                             writer.WriteLine($"{addressBook[i].name}#{addressBook[i].address}#{addressBook[i].number}#{addressBook[i].email}");
                         }
@@ -88,15 +87,21 @@ namespace AddressBook
                     Console.Write("Skriv in email för den person du vill ta bort från listan: ");
                     string remove = Console.ReadLine();
 
-                    for(int i = 0; i < addressBook.Count(); i++)
+                    for (int i = 0; i < addressBook.Count(); i++)
                     {
-                        if(remove == addressBook[i].email) 
+                        if (remove == addressBook[i].email)
                         {
                             //Source https://stackoverflow.com/questions/10018957/how-to-remove-item-from-list-in-c
                             addressBook.Remove(addressBook[i]);
                             Console.WriteLine($"{remove} har tagits bort från listan!");
                         }
                     }
+                    //Source: https://www.c-sharpcorner.com/article/csharp-streamwriter-example/
+                    using (StreamWriter writer = new StreamWriter(fileName))
+                        for (int i = 0; i < addressBook.Count(); i++)
+                        {
+                            writer.WriteLine($"{addressBook[i].name}#{addressBook[i].address}#{addressBook[i].number}#{addressBook[i].email}");
+                        }
                 }
             } while (command != "sluta");
         }
