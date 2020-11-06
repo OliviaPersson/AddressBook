@@ -12,7 +12,7 @@ namespace AddressBook
         class Person
         {
             public string firstName, lastName, number, email;
-            public Person (string fName, string lName, string num, string em)
+            public Person(string fName, string lName, string num, string em)
             {
                 firstName = fName;
                 lastName = lName;
@@ -33,16 +33,16 @@ namespace AddressBook
                 while ((line = file.ReadLine()) != null)
                 {
                     string[] words = line.Split('#');
-                    Console.WriteLine("{0} {1}  {2}  {3}", words[0], words[1], words[2], words[3]); //TestPrint
+                    //Console.WriteLine("{0} {1}  {2}  {3}", words[0], words[1], words[2], words[3]); //TestPrint
                     addressBook.Add(new Person(words[0], words[1], words[2], words[3]));
-                  
+
                 }
                 file.Close();
-                for (int i = 0; i < addressBook.Count(); i++)
+                /*for (int i = 0; i < addressBook.Count(); i++)
                 {
                     //TestPrint
                     Console.WriteLine($"{addressBook[i].firstName} {addressBook[i].lastName}  {addressBook[i].number}  {addressBook[i].email}");
-                }
+                }*/
             }
             Console.WriteLine("Hej och välkommen till adressboken!");
             Console.WriteLine("Skriv 'sluta' om du vill avsluta programmet!");
@@ -55,6 +55,14 @@ namespace AddressBook
                 if (command == "sluta")
                 {
                     Console.WriteLine("Hej då!");
+                }
+                else if (command == "visa")
+                {
+                    Console.WriteLine("     Namn          Tel              email");
+                    for (int i = 0; i < addressBook.Count(); i++)
+                    {
+                        Console.WriteLine($"{addressBook[i].firstName} {addressBook[i].lastName}  {addressBook[i].number}  {addressBook[i].email}");
+                    }
                 }
                 else if (command == "lägg till person")
                 {
