@@ -53,11 +53,13 @@ namespace AddressBook
                 }
                 else if (command == "visa")
                 {
-                    Console.WriteLine("Namn           Adress         Tel         email");
-                    Console.WriteLine("****************************************************************");
+                    Console.WriteLine("*************************************************************************************************");
+                    Console.WriteLine("  {0,-20}   {1,-20}   {2,-20}   {3,-20}", "Namn", "Adress", "Tel", "E-post");
+                    Console.WriteLine("*************************************************************************************************");
                     for (int i = 0; i < addressBook.Count(); i++)
                     {
-                        Console.WriteLine($"{addressBook[i].name} {addressBook[i].address}  {addressBook[i].number}  {addressBook[i].email}");
+                        //Console.WriteLine($"{addressBook[i].name} {addressBook[i].address}  {addressBook[i].number}  {addressBook[i].email}");
+                        Console.WriteLine("| {0,-20} | {1,-20} | {2,-20} | {3,-20}", addressBook[i].name, addressBook[i].address, addressBook[i].number, addressBook[i].email);
                     }
                 }
                 else if (command == "lägg till")
