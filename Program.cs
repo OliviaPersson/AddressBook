@@ -11,13 +11,13 @@ namespace AddressBook
     {
         class Person
         {
-            public string firstName, lastName, number, email;
-            public Person(string fName = "", string lName = "", string num = "", string em = "")
+            public string name, address, number, email;
+            public Person(string name = "", string address = "", string number = "", string email = "")
             {
-                firstName = fName;
-                lastName = lName;
-                number = num;
-                email = em;
+                this.name = name;
+                this.address = address;
+                this.number = number;
+                this.email = email;
             }
         }
         static void Main(string[] args)
@@ -34,7 +34,7 @@ namespace AddressBook
                 {
                     string[] words = line.Split('#');
                     //Console.WriteLine("{0} {1}  {2}  {3}", words[0], words[1], words[2], words[3]); //TestPrint
-                    addressBook.Add(new Person(fName: words[0], lName: words[1], num: words[2], em: words[3]));
+                    addressBook.Add(new Person(name: words[0], address: words[1], number: words[2], email: words[3]));
 
                 }
                 file.Close();
@@ -53,32 +53,32 @@ namespace AddressBook
                 }
                 else if (command == "visa")
                 {
-                    Console.WriteLine("     Namn          Tel              email");
-                    Console.WriteLine("*************************************************");
+                    Console.WriteLine("Namn           Adress         Tel         email");
+                    Console.WriteLine("****************************************************************");
                     for (int i = 0; i < addressBook.Count(); i++)
                     {
-                        Console.WriteLine($"{addressBook[i].firstName} {addressBook[i].lastName}  {addressBook[i].number}  {addressBook[i].email}");
+                        Console.WriteLine($"{addressBook[i].name} {addressBook[i].address}  {addressBook[i].number}  {addressBook[i].email}");
                     }
                 }
                 else if (command == "lägg till")
                 {
-                    Console.Write("Skriv in förnamn: ");
-                    string firstName = Console.ReadLine();
-                    Console.Write("Skriv in efternamn: ");
-                    string lastName = Console.ReadLine();
+                    Console.Write("Skriv in namn: ");
+                    string name = Console.ReadLine();
+                    Console.Write("Skriv in adress: ");
+                    string address = Console.ReadLine();
                     Console.Write("Skriv in tel nummer: ");
                     string number = Console.ReadLine();
                     Console.Write("Skriv in email: ");
                     string email = Console.ReadLine();
                     //Console.WriteLine($"namn: {firstName} {lastName} num: {number} email: {email}"); //TestPrint
-                    addressBook.Add(new Person(firstName, lastName, number, email));
+                    addressBook.Add(new Person(name, address, number, email));
                 }
                 else if (command == "spara")
                 {
                     using (StreamWriter writer = new StreamWriter(fileName))
                         for(int i = 0; i < addressBook.Count(); i++)
                         {
-                            writer.WriteLine($"{addressBook[i].firstName}#{addressBook[i].lastName}#{addressBook[i].number}#{addressBook[i].email}");
+                            writer.WriteLine($"{addressBook[i].name}#{addressBook[i].address}#{addressBook[i].number}#{addressBook[i].email}");
                         }
                 }
                 else if (command == "ta bort")
