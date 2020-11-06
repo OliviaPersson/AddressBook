@@ -54,12 +54,13 @@ namespace AddressBook
                 else if (command == "visa")
                 {
                     Console.WriteLine("     Namn          Tel              email");
+                    Console.WriteLine("*************************************************");
                     for (int i = 0; i < addressBook.Count(); i++)
                     {
                         Console.WriteLine($"{addressBook[i].firstName} {addressBook[i].lastName}  {addressBook[i].number}  {addressBook[i].email}");
                     }
                 }
-                else if (command == "lägg till person")
+                else if (command == "lägg till")
                 {
                     Console.Write("Skriv in förnamn: ");
                     string firstName = Console.ReadLine();
@@ -79,6 +80,20 @@ namespace AddressBook
                         {
                             writer.WriteLine($"{addressBook[i].firstName}#{addressBook[i].lastName}#{addressBook[i].number}#{addressBook[i].email}");
                         }
+                }
+                else if (command == "ta bort")
+                {
+                    Console.Write("Skriv in vilket namn du vill ta bort från listan: ");
+                    string remove = Console.ReadLine();
+
+                    for(int i = 0; i < addressBook.Count(); i++)
+                    {
+                        if(remove == addressBook[i].firstName) 
+                        {
+                            addressBook.Remove(addressBook[i]);
+                            Console.WriteLine($"{remove} har tagits bort från listan!");
+                        }
+                    }
                 }
             } while (command != "sluta");
         }
