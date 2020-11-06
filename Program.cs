@@ -38,11 +38,6 @@ namespace AddressBook
 
                 }
                 file.Close();
-                /*for (int i = 0; i < addressBook.Count(); i++)
-                {
-                    //TestPrint
-                    Console.WriteLine($"{addressBook[i].firstName} {addressBook[i].lastName}  {addressBook[i].number}  {addressBook[i].email}");
-                }*/
             }
             Console.WriteLine("Hej och välkommen till adressboken!");
             Console.WriteLine("Skriv 'sluta' om du vill avsluta programmet!");
@@ -76,6 +71,14 @@ namespace AddressBook
                     string email = Console.ReadLine();
                     Console.WriteLine($"namn: {firstName} {lastName} num: {number} email: {email}"); //TestPrint
                     addressBook.Add(new Person(firstName, lastName, number, email));
+                }
+                else if (command == "spara")
+                {
+                    using (StreamWriter writer = new StreamWriter(fileName))
+                        for(int i = 0; i < addressBook.Count(); i++)
+                        {
+                            writer.WriteLine($"{addressBook[i].firstName}#{addressBook[i].lastName}#{addressBook[i].number}#{addressBook[i].email}");
+                        }
                 }
             } while (command != "sluta");
         }
