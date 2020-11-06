@@ -12,7 +12,7 @@ namespace AddressBook
         class Person
         {
             public string firstName, lastName, number, email;
-            public Person(string fName, string lName, string num, string em)
+            public Person(string fName = "", string lName = "", string num = "", string em = "")
             {
                 firstName = fName;
                 lastName = lName;
@@ -34,7 +34,7 @@ namespace AddressBook
                 {
                     string[] words = line.Split('#');
                     //Console.WriteLine("{0} {1}  {2}  {3}", words[0], words[1], words[2], words[3]); //TestPrint
-                    addressBook.Add(new Person(words[0], words[1], words[2], words[3]));
+                    addressBook.Add(new Person(fName: words[0], lName: words[1], num: words[2], em: words[3]));
 
                 }
                 file.Close();
@@ -70,7 +70,7 @@ namespace AddressBook
                     string number = Console.ReadLine();
                     Console.Write("Skriv in email: ");
                     string email = Console.ReadLine();
-                    Console.WriteLine($"namn: {firstName} {lastName} num: {number} email: {email}"); //TestPrint
+                    //Console.WriteLine($"namn: {firstName} {lastName} num: {number} email: {email}"); //TestPrint
                     addressBook.Add(new Person(firstName, lastName, number, email));
                 }
                 else if (command == "spara")
@@ -83,13 +83,14 @@ namespace AddressBook
                 }
                 else if (command == "ta bort")
                 {
-                    Console.Write("Skriv in vilket namn du vill ta bort från listan: ");
+                    Console.Write("Skriv in email för den person du vill ta bort från listan: ");
                     string remove = Console.ReadLine();
 
                     for(int i = 0; i < addressBook.Count(); i++)
                     {
-                        if(remove == addressBook[i].firstName) 
+                        if(remove == addressBook[i].email) 
                         {
+                            //Source https://stackoverflow.com/questions/10018957/how-to-remove-item-from-list-in-c
                             addressBook.Remove(addressBook[i]);
                             Console.WriteLine($"{remove} har tagits bort från listan!");
                         }
