@@ -30,13 +30,11 @@ namespace AddressBook
             using (StreamReader file = new StreamReader(fileName))
             {
                 string line;
-
                 while ((line = file.ReadLine()) != null)
                 {
                     string[] words = line.Split('#');
                     //Console.WriteLine("{0} {1}  {2}  {3}", words[0], words[1], words[2], words[3]); //TestPrint
                     addressBook.Add(new Person(name: words[0], address: words[1], number: words[2], email: words[3]));
-
                 }
                 file.Close();
             }
@@ -59,7 +57,7 @@ namespace AddressBook
                     for (int i = 0; i < addressBook.Count(); i++)
                     {
                         //Console.WriteLine($"{addressBook[i].name} {addressBook[i].address}  {addressBook[i].number}  {addressBook[i].email}");
-                        Console.WriteLine("| {0,-20} | {1,-20} | {2,-20} | {3,-20}", addressBook[i].name, addressBook[i].address, addressBook[i].number, addressBook[i].email);
+                        Console.WriteLine("{0,-20} | {1,-20} | {2,-20} | {3,-20}", addressBook[i].name, addressBook[i].address, addressBook[i].number, addressBook[i].email);
                     }
                 }
                 else if (command == "lägg till")
@@ -84,16 +82,28 @@ namespace AddressBook
                 }
                 else if (command == "ta bort")
                 {
-                    Console.Write("Skriv in email för den person du vill ta bort från listan: ");
+                    Console.Write("Skriv in email för den person du vill ta bort från listan. Finns ej email tryck enter: ");
                     string remove = Console.ReadLine();
-
                     for (int i = 0; i < addressBook.Count(); i++)
                     {
                         if (remove == addressBook[i].email)
                         {
-                            //Source https://stackoverflow.com/questions/10018957/how-to-remove-item-from-list-in-c
-                            addressBook.Remove(addressBook[i]);
-                            Console.WriteLine($"{remove} har tagits bort från listan!");
+                            if (remove == "")
+                            {
+                                Console.Write("Skriv in tel nummer för den person du vill ta bort från listan: ");
+                                remove = Console.ReadLine();
+                                if (remove == addressBook[i].number)
+                                {
+                                    addressBook.Remove(addressBook[i]);
+                                    Console.WriteLine($"{remove} har tagits bort från listan!");
+                                }
+                            }
+                            else
+                            {
+                                //Source https://stackoverflow.com/questions/10018957/how-to-remove-item-from-list-in-c
+                                addressBook.Remove(addressBook[i]);
+                                Console.WriteLine($"{remove} har tagits bort från listan!");
+                            }
                         }
                     }
                     //Source: https://www.c-sharpcorner.com/article/csharp-streamwriter-example/
